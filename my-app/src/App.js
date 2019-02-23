@@ -39,12 +39,14 @@ class App extends Component {
               <td>{person.name}</td>
               <td>{person.surname}</td>
               <td>{person.phone}</td>
+              <td><button>Favorite</button></td>
               </tr>
               :
               <tr key={person.id}>
               <td>{person.name}</td>
               <td>{person.surname}</td>
               <td>{person.phone}</td>
+              <td><button>Favorite</button></td>
               </tr>
 
               
