@@ -18,7 +18,8 @@ class App extends Component {
         phone: "987-654-321",
         isFavorite: true
       }
-    ]
+    ],
+    nameInputValue: "",
   };
 
 toggleFavorite = personId=>{
@@ -33,12 +34,32 @@ removePerson = personId => {
     people: this.state.people.filter(person => person.id !== personId),
   });
 };
-
+handleNameChange = (event) =>{
+  this.setState({
+    nameInputValue: event.target.value
+  })
+}
+addPerson = () => {
+  this.setState({
+    people: this.state.people.concat({
+      id: Date.now(),
+      name: this.state.nameInputValue,
+      surname: "",
+      phone: "",
+      isFavorite: false
+    }),
+    nameInputValue: ""
+  })
+}
   render() {
     return (
       
       <div className="App">
         <header className="App-header">
+        <form>
+          <input onChange={this.handleNameChange} value={this.state.nameInputValue}></input>
+          <div onClick={this.addPerson}>add</div>
+        </form>
             <table>
               <thead>
                 <tr>
