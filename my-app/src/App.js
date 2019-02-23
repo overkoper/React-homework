@@ -77,7 +77,7 @@ addPerson = () => {
           <input onChange={this.handleSurnameChange} value={this.state.surnameInputValue} type="text" id="surname"></input>
           <label htmlFor="name">phone</label>
           <input onChange={this.handlePhoneChange} value={this.state.phoneInputValue} type="phone" id="phone"></input>
-          <div onClick={this.addPerson}>add</div>
+          <div className="add-btn" onClick={this.addPerson}>add</div>
         </form>
             <table>
               <thead>
@@ -94,9 +94,9 @@ addPerson = () => {
               <td>{person.name}</td>
               <td>{person.surname}</td>
               <td>{person.phone}</td>
-              <td>
-                <button onClick={()=>this.toggleFavorite(person.id)}>Favorite</button>
-                <button onClick={()=>this.removePerson(person.id)}>Delete</button>
+              <td className="button-panel">
+                <button className="fav-btn" onClick={()=>this.toggleFavorite(person.id)}>Favorite</button>
+                <button className="remove-btn" onClick={()=>this.removePerson(person.id)}>Delete</button>
               </td>
               </tr>
               :
@@ -104,9 +104,9 @@ addPerson = () => {
               <td>{person.name}</td>
               <td>{person.surname}</td>
               <td>{person.phone}</td>
-              <td>
-                <button onClick={()=>this.toggleFavorite(person.id)}>Favorite</button>
-                <button onClick={()=>this.removePerson(person.id)}>Delete</button>
+              <td className="button-panel">
+                <button className="fav-btn" onClick={()=>this.toggleFavorite(person.id)}>Favorite</button>
+                <button className="remove-btn" onClick={()=>this.removePerson(person.id)}>Delete</button>
               </td>
               </tr>
 

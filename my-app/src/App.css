@@ -25,6 +25,39 @@
 .favorite{
   background-color: rgba(59, 167, 10, 0.644);
 }
+table{
+  border: solid white 2px;
+}
+.button-panel{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+form{
+  display: flex;
+  flex-direction: column;
+}
+.add-btn{
+  border: solid white 2px;
+  background-color: rgba(14, 143, 14, 0.774);
+  padding: 3px 3px 3px 3px;
+  margin: 20px 0 20px 0;
+  cursor: pointer;
+}
+.remove-btn{
+  border: none;
+  background-color: white;
+  color: red;
+  padding: 1px 10px 1px 10px;
+  margin: 3px 0 3px 0;
+}
+.fav-btn{
+  border: none;
+  background-color: white;
+  color: rgba(14, 143, 14, 0.774);
+  padding: 1px 10px 1px 10px;
+  margin: 3px 0 3px 0;
+}
 
 
 @keyframes App-logo-spin {
