@@ -20,6 +20,8 @@ class App extends Component {
       }
     ],
     nameInputValue: "",
+    surnameInputValue: "",
+    phoneInputValue: ""
   };
 
 toggleFavorite = personId=>{
@@ -39,16 +41,28 @@ handleNameChange = (event) =>{
     nameInputValue: event.target.value
   })
 }
+  handleSurnameChange = (event) =>{
+    this.setState({
+      surnameInputValue: event.target.value
+    })
+  }
+    handlePhoneChange = (event) =>{
+      this.setState({
+        phoneInputValue: event.target.value
+      })
+}
 addPerson = () => {
   this.setState({
     people: this.state.people.concat({
       id: Date.now(),
       name: this.state.nameInputValue,
-      surname: "",
-      phone: "",
+      surname: this.state.surnameInputValue,
+      phone: this.state.phoneInputValue,
       isFavorite: false
     }),
-    nameInputValue: ""
+    nameInputValue: "",
+    surnameInputValue: "",
+    phoneInputValue: ""
   })
 }
   render() {
@@ -58,6 +72,8 @@ addPerson = () => {
         <header className="App-header">
         <form>
           <input onChange={this.handleNameChange} value={this.state.nameInputValue}></input>
+          <input onChange={this.handleSurnameChange} value={this.state.surnameInputValue}></input>
+          <input onChange={this.handlePhoneChange} value={this.state.phoneInputValue}></input>
           <div onClick={this.addPerson}>add</div>
         </form>
             <table>
