@@ -34,11 +34,22 @@ class App extends Component {
               </thead>
               <tbody>
             {this.state.people.map(person => (
-              <tr key={person.id}>
-              <td>{person.name}</td> 
+              person.isFavorite ? 
+              <tr className="favorite" key={person.id}>
+              <td>{person.name}</td>
               <td>{person.surname}</td>
               <td>{person.phone}</td>
               </tr>
+              :
+              <tr key={person.id}>
+              <td>{person.name}</td>
+              <td>{person.surname}</td>
+              <td>{person.phone}</td>
+              </tr>
+
+              
+              
+          
             ))}
             </tbody>
             </table>
