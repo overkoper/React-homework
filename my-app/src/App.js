@@ -20,13 +20,20 @@ class App extends Component {
       }
     ]
   };
+
 toggleFavorite = personId=>{
   this.setState({
     people: this.state.people.map(person => 
       person.id !== personId? person : {...person, isFavorite : !person.isFavorite})
-  })
-  
+  }) 
 }
+
+removePerson = personId => {
+  this.setState({
+    people: this.state.people.filter(person => person.id !== personId),
+  });
+};
+
   render() {
     return (
       
@@ -47,14 +54,20 @@ toggleFavorite = personId=>{
               <td>{person.name}</td>
               <td>{person.surname}</td>
               <td>{person.phone}</td>
-              <td><button onClick={()=>this.toggleFavorite(person.id)}>Favorite</button></td>
+              <td>
+                <button onClick={()=>this.toggleFavorite(person.id)}>Favorite</button>
+                <button onClick={()=>this.removePerson(person.id)}>Delete</button>
+              </td>
               </tr>
               :
               <tr key={person.id}>
               <td>{person.name}</td>
               <td>{person.surname}</td>
               <td>{person.phone}</td>
-              <td><button onClick={()=>this.toggleFavorite(person.id)}>Favorite</button></td>
+              <td>
+                <button onClick={()=>this.toggleFavorite(person.id)}>Favorite</button>
+                <button onClick={()=>this.removePerson(person.id)}>Delete</button>
+              </td>
               </tr>
 
               
