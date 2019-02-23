@@ -71,9 +71,12 @@ addPerson = () => {
       <div className="App">
         <header className="App-header">
         <form>
-          <input onChange={this.handleNameChange} value={this.state.nameInputValue}></input>
-          <input onChange={this.handleSurnameChange} value={this.state.surnameInputValue}></input>
-          <input onChange={this.handlePhoneChange} value={this.state.phoneInputValue}></input>
+          <label htmlFor="name">name</label>
+          <input onChange={this.handleNameChange} value={this.state.nameInputValue} type="text" id="name"></input>
+          <label htmlFor="name">surname</label>
+          <input onChange={this.handleSurnameChange} value={this.state.surnameInputValue} type="text" id="surname"></input>
+          <label htmlFor="name">phone</label>
+          <input onChange={this.handlePhoneChange} value={this.state.phoneInputValue} type="phone" id="phone"></input>
           <div onClick={this.addPerson}>add</div>
         </form>
             <table>
