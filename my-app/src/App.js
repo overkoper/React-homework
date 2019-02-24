@@ -24,98 +24,149 @@ class App extends Component {
     phoneInputValue: ""
   };
 
-toggleFavorite = personId=>{
-  this.setState({
-    people: this.state.people.map(person => 
-      person.id !== personId? person : {...person, isFavorite : !person.isFavorite})
-  }) 
-}
+  toggleFavorite = personId => {
+    this.setState({
+      people: this.state.people.map(person =>
+        person.id !== personId
+          ? person
+          : { ...person, 
+            isFavorite: !person.isFavorite }
+      )
+    });
+  };
 
-removePerson = personId => {
-  this.setState({
-    people: this.state.people.filter(person => person.id !== personId),
-  });
-};
-handleNameChange = (event) =>{
-  this.setState({
-    nameInputValue: event.target.value
-  })
-}
-  handleSurnameChange = (event) =>{
+  editPerson = personId => {
+    this.setState({
+      people: this.state.people.map(person =>
+        person.id !== personId
+          ? person
+          : { id: Date.now(), 
+              name: this.state.nameInputValue,
+              surname: this.state.surnameInputValue,
+              phone: this.state.phoneInputValue, 
+            isFavorite: person.isFavorite }
+      )
+    });
+  };
+
+  removePerson = personId => {
+    this.setState({
+      people: this.state.people.filter(person => person.id !== personId)
+    });
+  };
+  handleNameChange = event => {
+    this.setState({
+      nameInputValue: event.target.value
+    });
+  };
+  handleSurnameChange = event => {
     this.setState({
       surnameInputValue: event.target.value
-    })
-  }
-    handlePhoneChange = (event) =>{
-      this.setState({
-        phoneInputValue: event.target.value
-      })
-}
-addPerson = () => {
-  this.setState({
-    people: this.state.people.concat({
-      id: Date.now(),
-      name: this.state.nameInputValue,
-      surname: this.state.surnameInputValue,
-      phone: this.state.phoneInputValue,
-      isFavorite: false
-    }),
-    nameInputValue: "",
-    surnameInputValue: "",
-    phoneInputValue: ""
-  })
-}
+    });
+  };
+  handlePhoneChange = event => {
+    this.setState({
+      phoneInputValue: event.target.value
+    });
+  };
+  addPerson = () => {
+    this.setState({
+      people: this.state.people.concat({
+        id: Date.now(),
+        name: this.state.nameInputValue,
+        surname: this.state.surnameInputValue,
+        phone: this.state.phoneInputValue,
+        isFavorite: false
+      }),
+      nameInputValue: "",
+      surnameInputValue: "",
+      phoneInputValue: ""
+    });
+  };
   render() {
     return (
-      
       <div className="App">
         <header className="App-header">
-        <form>
-          <label htmlFor="name">name</label>
-          <input onChange={this.handleNameChange} value={this.state.nameInputValue} type="text" id="name"></input>
-          <label htmlFor="name">surname</label>
-          <input onChange={this.handleSurnameChange} value={this.state.surnameInputValue} type="text" id="surname"></input>
-          <label htmlFor="name">phone</label>
-          <input onChange={this.handlePhoneChange} value={this.state.phoneInputValue} type="phone" id="phone"></input>
-          <div className="add-btn" onClick={this.addPerson}>add</div>
-        </form>
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Surname</th>
-                  <th>Phone</th>
-                </tr>
-              </thead>
-              <tbody>
-            {this.state.people.map(person => (
-              person.isFavorite ? 
-              <tr className="favorite" key={person.id}>
-              <td>{person.name}</td>
-              <td>{person.surname}</td>
-              <td>{person.phone}</td>
-              <td className="button-panel">
-                <button className="fav-btn" onClick={()=>this.toggleFavorite(person.id)}>Favorite</button>
-                <button className="remove-btn" onClick={()=>this.removePerson(person.id)}>Delete</button>
-              </td>
+          <form>
+            <label htmlFor="name">name</label>
+            <input
+              onChange={this.handleNameChange}
+              value={this.state.nameInputValue}
+              type="text"
+              id="name"
+            />
+            <label htmlFor="surname">surname</label>
+            <input
+              onChange={this.handleSurnameChange}
+              value={this.state.surnameInputValue}
+              type="text"
+              id="surname"
+            />
+            <label htmlFor="phone">phone</label>
+            <input
+              onChange={this.handlePhoneChange}
+              value={this.state.phoneInputValue}
+              type="phone"
+              id="phone"
+            />
+            <div className="add-btn" onClick={this.addPerson}>
+              add
+            </div>
+          </form>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Phone</th>
               </tr>
-              :
-              <tr key={person.id}>
-              <td>{person.name}</td>
-              <td>{person.surname}</td>
-              <td>{person.phone}</td>
-              <td className="button-panel">
-                <button className="fav-btn" onClick={()=>this.toggleFavorite(person.id)}>Favorite</button>
-                <button className="remove-btn" onClick={()=>this.removePerson(person.id)}>Delete</button>
-              </td>
-              </tr>
-
-              
-              
-          
-            ))}
+            </thead>
+            <tbody>
+              {this.state.people.map(person =>
+                person.isFavorite ? (
+                  <tr className="favorite" key={person.id}>
+                    <td onClick={()=> this.editPerson(person.id)}>{person.name}</td>
+                    <td>{person.surname}</td>
+                    <td>{person.phone}</td>
+                    <td className="button-panel">
+                      <button
+                        className="fav-btn"
+                        onClick={() => this.toggleFavorite(person.id)}
+                      >
+                        Favorite
+                      </button>
+                      <button
+                        className="remove-btn"
+                        onClick={() => this.removePerson(person.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ) : (
+                  <tr key={person.id}>
+                    <td>{person.name}</td>
+                    <td>{person.surname}</td>
+                    <td>{person.phone}</td>
+                    <td className="button-panel">
+                      <button
+                        className="fav-btn"
+                        onClick={() => this.toggleFavorite(person.id)}
+                      >
+                        Favorite
+                      </button>
+                      <button
+                        className="remove-btn"
+                        onClick={() => this.removePerson(person.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                )
+              )}
             </tbody>
-            </table>
+          </table>
         </header>
       </div>
     );
