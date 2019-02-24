@@ -19,6 +19,7 @@ class App extends Component {
         isFavorite: true
       }
     ],
+    idInputValue: 0,
     nameInputValue: "",
     surnameInputValue: "",
     phoneInputValue: ""
@@ -34,7 +35,14 @@ class App extends Component {
       )
     });
   };
-
+targetChange = (personId, personName, personSurname, personPhone) => {
+  this.setState({
+    idInputValue: personId,
+    nameInputValue: personName,
+    surnameInputValue: personSurname,
+    phoneInputValue: personPhone
+  })
+}
   editPerson = personId => {
     this.setState({
       people: this.state.people.map(person =>
@@ -45,7 +53,10 @@ class App extends Component {
               surname: this.state.surnameInputValue,
               phone: this.state.phoneInputValue, 
             isFavorite: person.isFavorite }
-      )
+      ),
+      nameInputValue: "",
+      surnameInputValue: "",
+      phoneInputValue: ""
     });
   };
 
@@ -124,8 +135,8 @@ class App extends Component {
             <tbody>
               {this.state.people.map(person =>
                 person.isFavorite ? (
-                  <tr className="favorite" key={person.id}>
-                    <td onClick={()=> this.editPerson(person.id)}>{person.name}</td>
+                  <tr className="favorite" key={person.id} >
+                    <td onClick={()=> this.targetChange(person.id, person.name, person.surname, person.phone)}>{person.name}</td>
                     <td>{person.surname}</td>
                     <td>{person.phone}</td>
                     <td className="button-panel">
@@ -134,6 +145,11 @@ class App extends Component {
                         onClick={() => this.toggleFavorite(person.id)}
                       >
                         Favorite
+                      </button >
+                      <button 
+                        className="fav-btn"
+                        onClick={()=>this.editPerson(person.id)}>
+                        Edit
                       </button>
                       <button
                         className="remove-btn"
@@ -145,7 +161,7 @@ class App extends Component {
                   </tr>
                 ) : (
                   <tr key={person.id}>
-                    <td>{person.name}</td>
+                    <td onClick={()=> this.targetChange(person.id, person.name, person.surname, person.phone)}>{person.name}</td>
                     <td>{person.surname}</td>
                     <td>{person.phone}</td>
                     <td className="button-panel">
@@ -154,6 +170,11 @@ class App extends Component {
                         onClick={() => this.toggleFavorite(person.id)}
                       >
                         Favorite
+                      </button>
+                      <button 
+                        className="fav-btn"
+                        onClick={()=>this.editPerson(person.id)}>
+                        Edit
                       </button>
                       <button
                         className="remove-btn"
