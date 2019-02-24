@@ -23,7 +23,7 @@
   color: #61dafb;
 }
 .favorite{
-  background-color: rgba(59, 167, 10, 0.644);
+  background-color: rgba(233, 236, 13, 0.644);
 }
 table{
   border: solid white 2px;
@@ -41,30 +41,24 @@ form{
   border: solid white 2px;
   background-color: rgba(14, 143, 14, 0.774);
   padding: 3px 3px 3px 3px;
-  margin: 20px 0 20px 0;
+  margin: 20px 0 10px 0;
   cursor: pointer;
 }
-.remove-btn{
-  border: none;
+.button{
+  border: black 1px solid;
   background-color: white;
+  padding: 1px 10px 1px 10px;
+  font-weight: 800;
+}
+.remove{
   color: red;
-  padding: 1px 10px 1px 10px;
-  margin: 3px 0 3px 0;
 }
-.fav-btn{
-  border: none;
-  background-color: white;
+.edit{
+  color: blue;
+}
+.fav{
   color: rgba(14, 143, 14, 0.774);
-  padding: 1px 10px 1px 10px;
-  margin: 3px 0 3px 0;
 }
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.instruction{
+  font-size: 12px;
 }

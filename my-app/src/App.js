@@ -36,11 +36,18 @@ class App extends Component {
     });
   };
 targetChange = (personId, personName, personSurname, personPhone) => {
+  this.state.idInputValue !== personId?
   this.setState({
     idInputValue: personId,
     nameInputValue: personName,
     surnameInputValue: personSurname,
     phoneInputValue: personPhone
+  }):
+  this.setState({
+    idInputValue: 0,
+    nameInputValue: "",
+    surnameInputValue: "",
+    phoneInputValue: ""
   })
 }
   editPerson = personId => {
@@ -135,24 +142,24 @@ targetChange = (personId, personName, personSurname, personPhone) => {
             <tbody>
               {this.state.people.map(person =>
                 person.isFavorite ? (
-                  <tr className="favorite" key={person.id} >
-                    <td onClick={()=> this.targetChange(person.id, person.name, person.surname, person.phone)}>{person.name}</td>
+                  <tr className="favorite" key={person.id} onClick={(event)=>{event.stopPropagation(); this.targetChange(person.id, person.name, person.surname, person.phone)}}>
+                    <td>{person.name}</td>
                     <td>{person.surname}</td>
                     <td>{person.phone}</td>
                     <td className="button-panel">
                       <button
-                        className="fav-btn"
+                        className="button fav"
                         onClick={() => this.toggleFavorite(person.id)}
                       >
                         Favorite
                       </button >
                       <button 
-                        className="fav-btn"
+                        className="button edit"
                         onClick={()=>this.editPerson(person.id)}>
                         Edit
                       </button>
                       <button
-                        className="remove-btn"
+                        className="button remove"
                         onClick={() => this.removePerson(person.id)}
                       >
                         Delete
@@ -160,24 +167,24 @@ targetChange = (personId, personName, personSurname, personPhone) => {
                     </td>
                   </tr>
                 ) : (
-                  <tr key={person.id}>
-                    <td onClick={()=> this.targetChange(person.id, person.name, person.surname, person.phone)}>{person.name}</td>
+                  <tr key={person.id} onClick={(event)=>{event.stopPropagation(); this.targetChange(person.id, person.name, person.surname, person.phone)}}>
+                    <td>{person.name}</td>
                     <td>{person.surname}</td>
                     <td>{person.phone}</td>
                     <td className="button-panel">
                       <button
-                        className="fav-btn"
+                        className="button fav"
                         onClick={() => this.toggleFavorite(person.id)}
                       >
                         Favorite
                       </button>
                       <button 
-                        className="fav-btn"
+                        className="button edit"
                         onClick={()=>this.editPerson(person.id)}>
                         Edit
                       </button>
                       <button
-                        className="remove-btn"
+                        className="button remove"
                         onClick={() => this.removePerson(person.id)}
                       >
                         Delete
@@ -188,6 +195,7 @@ targetChange = (personId, personName, personSurname, personPhone) => {
               )}
             </tbody>
           </table>
+          <div className="instruction">To edit data click on row you want to change and confirm using "edit" button</div>
         </header>
       </div>
     );
